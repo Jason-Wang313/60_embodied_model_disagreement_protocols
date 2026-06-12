@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-06-12T04:25:06.502259",
+  "count": 1200,
+  "crossref_unique_before_fallback": 2097,
+  "errors": [],
+  "queries": [
+    "robot world model ensemble disagreement",
+    "embodied uncertainty planning robot model disagreement",
+    "robotic active probing model disagreement",
+    "visual tactile world model ensemble robotics",
+    "sim-to-real world model ensemble robot",
+    "model predictive control ensemble disagreement robot",
+    "contact-rich manipulation world model uncertainty",
+    "robot foundation model uncertainty action planning",
+    "active learning robotics uncertainty ensemble",
+    "physics reasoning robot world models",
+    "robot exploration uncertainty active learning",
+    "safe probing robot manipulation uncertainty"
+  ],
+  "tag_counts": {
+    "world-model": 41,
+    "uncertainty": 376,
+    "embodied-manipulation": 299,
+    "planning-control": 498,
+    "active-probing": 271,
+    "sim2real": 73,
+    "model-disagreement": 167,
+    "general-robot-learning": 133
+  }
+}

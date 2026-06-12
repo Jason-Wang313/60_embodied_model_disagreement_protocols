@@ -1,0 +1,36 @@
+{
+  "trials": 1080,
+  "strategies": [
+    "uncertainty_threshold",
+    "latent_disagreement_score",
+    "executable_probe_protocol"
+  ],
+  "ambiguities": [
+    "free_space_dynamics",
+    "occluded_contact",
+    "friction_cone",
+    "support_graph",
+    "tool_hinge",
+    "object_identity"
+  ],
+  "strategy_stats": {
+    "uncertainty_threshold": {
+      "resolved_rate": 0.47191305555555546,
+      "unsafe_false_accept_rate": 0.34687027777777785,
+      "post_probe_model_error": 0.2800483333333333,
+      "physical_probe_cost": 0.17057500000000006
+    },
+    "latent_disagreement_score": {
+      "resolved_rate": 0.614419722222222,
+      "unsafe_false_accept_rate": 0.2667205555555555,
+      "post_probe_model_error": 0.20787888888888884,
+      "physical_probe_cost": 0.3351122222222222
+    },
+    "executable_probe_protocol": {
+      "resolved_rate": 0.7953555555555554,
+      "unsafe_false_accept_rate": 0.10599333333333331,
+      "post_probe_model_error": 0.1121402777777777,
+      "physical_probe_cost": 1.9274988888888904
+    }
+  }
+}

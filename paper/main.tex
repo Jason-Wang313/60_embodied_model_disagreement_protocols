@@ -1,0 +1,152 @@
+\documentclass{article}
+
+\usepackage{iclr2026_conference,times}
+\input{math_commands.tex}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\iclrfinalcopy
+
+\title{Embodied Model Disagreement Protocols: Turning World-Model Uncertainty into Physical Probes}
+
+\author{Robotics 60 Paper Batch, Paper 60\\
+Recovery build\\
+\texttt{embodied\_model\_disagreement\_protocols}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Robot world models increasingly expose disagreement through ensembles, Bayesian heads, uncertainty penalties, or rollout variance.
+This paper argues that embodied agents should not treat this disagreement primarily as a scalar confidence score.
+For robots, the operational question is: what small physical probe would distinguish the candidate models without making the scene unsafe?
+We propose an embodied model disagreement protocol that compiles a disagreement set into executable probe actions, predicted observation signatures, safety gates, and stopping rules.
+A 1200-row literature sweep shows that the local field is rich in uncertainty, planning, and world-model work, with planning-control as the largest discovered tag cluster.
+In a deterministic diagnostic over 1080 trials, executable probes resolve 0.795 of disagreements and reduce unsafe false accepts to 0.106, compared with 0.347 for a scalar uncertainty threshold.
+The contribution is deliberately modest: a protocol-level mechanism and an inspectable witness, not a claim of hardware dominance.
+\end{abstract}
+
+\section{Motivation}
+Disagreement among robot world models is often useful, but it is under-specified.
+A high ensemble variance can tell a planner that something is uncertain, yet it does not say whether the robot should tap the object, lift a corner, change viewpoint, pause for tactile evidence, or avoid the action entirely.
+That missing compilation step matters because embodied uncertainty is not just epistemic; it is tied to contact, support, occlusion, compliance, and safety.
+
+The central thesis is that model disagreement should be turned into a physical question.
+Instead of asking whether the ensemble is confident enough, the robot asks which low-cost observation would distinguish the candidate dynamics while respecting a safety gate.
+This converts uncertainty from a passive score into an executable protocol.
+
+\section{Related Work}
+The recovery sweep collected 1200 rows in \texttt{docs/related\_work\_matrix.csv}, then produced 300-paper, 225-paper, and 100-paper review subsets.
+The largest tag cluster was planning-control with 498 rows.
+The sweep supports a narrow gap: the field already has ensemble dynamics, learned world models, active learning, exploration, and safe planning, but these lines often stop before specifying the physical observation that would resolve a particular embodied disagreement.
+
+World models and model-based control provide predictive candidates for planning \citep{ha2018world, nagabandi2018neural}.
+Ensembles and uncertainty estimates help identify where those candidates diverge \citep{lakshminarayanan2017simple, chua2018deep}.
+Active learning and exploration select information-gathering actions \citep{settles2009active}.
+Robotics adds the missing constraint: the query is a physical intervention with contact and safety consequences \citep{levine2016end, brohan2023rt1}.
+
+\section{Protocol}
+Let $\mathcal{M}=\{m_i\}$ be candidate embodied world models and $b$ be the current belief over them.
+For a candidate probe action $a$, each model predicts an observation signature $o_i(a)$: visual change, tactile impulse, support transition, or short-horizon state change.
+The protocol chooses
+\begin{equation}
+a^\star = \arg\max_{a \in \mathcal{A}_{safe}} \Big[ D(\{o_i(a)\}) - \lambda C(a) - \beta R(a) \Big],
+\end{equation}
+where $D$ is predicted model-separating disagreement, $C$ is physical cost, $R$ is risk, and $\mathcal{A}_{safe}$ is filtered by a safety gate.
+After executing the probe, the robot updates $b$, discards models whose predicted signatures disagree with the observation, and either continues probing or returns to task planning.
+
+The protocol has four required outputs:
+\begin{enumerate}
+\item an executable probe action;
+\item predicted observation signatures for each candidate model;
+\item a safety gate and abort condition;
+\item a stopping rule for when the disagreement is sufficiently resolved.
+\end{enumerate}
+These outputs distinguish the protocol from a scalar uncertainty bonus.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.94\linewidth]{figures/probe_protocol_summary.png}
+\caption{Deterministic diagnostic over six embodied ambiguity classes. Executable probes resolve more model disagreements and reduce unsafe false accepts, but pay a deliberate physical-probe cost.}
+\label{fig:probe}
+\end{figure}
+
+\section{Diagnostic}
+We implement a deterministic witness with six ambiguity classes: free-space dynamics, occluded contact, friction cones, support graphs, tool hinges, and object identity.
+Three evaluation styles are compared: a scalar uncertainty threshold, a latent disagreement score, and the executable probe protocol.
+The diagnostic produces 1080 trials in \texttt{docs/probe\_protocol\_trials.csv} and summary rows in \texttt{docs/probe\_protocol\_results.csv}.
+
+\begin{table}[t]
+\centering
+\caption{Mean diagnostic results. The protocol improves disagreement resolution and reduces unsafe false accepts at the cost of executing physical probes.}
+\label{tab:diagnostic}
+\begin{tabular}{lccc}
+\toprule
+Method & Resolved & Unsafe false accepts & Probe cost \\
+\midrule
+Uncertainty threshold & 0.472 & 0.347 & 0.171 \\
+Latent disagreement & 0.614 & 0.267 & 0.335 \\
+Executable probe protocol & 0.795 & 0.106 & 1.927 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The result is not surprising, and that is the point.
+If a disagreement is about friction, contact, support, or identity, passive uncertainty scores often detect ambiguity without resolving it.
+The executable protocol spends physical cost to ask a discriminating question.
+Figure~\ref{fig:probe} and Table~\ref{tab:diagnostic} make the tradeoff explicit: the protocol is not free, but it reduces the dangerous case where the planner accepts a model that should have been tested.
+
+\section{Limitations}
+This paper should be read as a protocol proposal.
+The diagnostic is synthetic, the probe library is hand-specified, and no hardware claim is made.
+The largest unresolved problem is the safety gate: in difficult manipulation settings, deciding whether a probe is safe may be as hard as the original planning problem.
+The protocol is still useful because it forces papers to expose that requirement rather than hiding it behind a scalar uncertainty score.
+
+\section{Conclusion}
+Embodied model disagreement is valuable only when it changes what the robot does.
+The proposed protocol turns disagreement into safe physical probes with predicted observation signatures and stopping rules.
+For the batch artifact, the paper supplies a literature matrix, review subsets, diagnostic data, source, figure, and compiled PDF.
+For future work, the obvious next step is a hardware study where the same disagreement set is tested with visual, tactile, and contact probes.
+
+\begin{thebibliography}{9}
+\bibitem[Ha and Schmidhuber(2018)]{ha2018world}
+David Ha and J\"urgen Schmidhuber.
+\newblock World models.
+\newblock \emph{arXiv:1803.10122}, 2018.
+
+\bibitem[Nagabandi et~al.(2018)]{nagabandi2018neural}
+Anusha Nagabandi, Gregory Kahn, Ronald S. Fearing, and Sergey Levine.
+\newblock Neural network dynamics for model-based deep reinforcement learning with model-free fine-tuning.
+\newblock In \emph{IEEE International Conference on Robotics and Automation}, 2018.
+
+\bibitem[Lakshminarayanan et~al.(2017)]{lakshminarayanan2017simple}
+Balaji Lakshminarayanan, Alexander Pritzel, and Charles Blundell.
+\newblock Simple and scalable predictive uncertainty estimation using deep ensembles.
+\newblock In \emph{NeurIPS}, 2017.
+
+\bibitem[Chua et~al.(2018)]{chua2018deep}
+Kurtland Chua, Roberto Calandra, Rowan McAllister, and Sergey Levine.
+\newblock Deep reinforcement learning in a handful of trials using probabilistic dynamics models.
+\newblock In \emph{NeurIPS}, 2018.
+
+\bibitem[Settles(2009)]{settles2009active}
+Burr Settles.
+\newblock Active learning literature survey.
+\newblock University of Wisconsin-Madison, 2009.
+
+\bibitem[Levine et~al.(2016)]{levine2016end}
+Sergey Levine, Chelsea Finn, Trevor Darrell, and Pieter Abbeel.
+\newblock End-to-end training of deep visuomotor policies.
+\newblock \emph{Journal of Machine Learning Research}, 2016.
+
+\bibitem[Brohan et~al.(2023)]{brohan2023rt1}
+Anthony Brohan et~al.
+\newblock RT-1: Robotics transformer for real-world control at scale.
+\newblock In \emph{Robotics: Science and Systems}, 2023.
+\end{thebibliography}
+
+\end{document}
