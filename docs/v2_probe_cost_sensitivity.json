@@ -1,0 +1,58 @@
+{
+  "risk_weight": 1.0,
+  "cost_weights": [
+    0.0,
+    0.1,
+    0.25,
+    0.5,
+    1.25
+  ],
+  "rows": [
+    {
+      "risk_weight": 1.0,
+      "cost_weight": 0.0,
+      "best_strategy": "executable_probe_protocol",
+      "uncertainty_utility": 0.12504277777777761,
+      "latent_utility": 0.34769916666666645,
+      "probe_utility": 0.6893622222222221,
+      "abstain_utility": 0.0
+    },
+    {
+      "risk_weight": 1.0,
+      "cost_weight": 0.1,
+      "best_strategy": "executable_probe_protocol",
+      "uncertainty_utility": 0.10798527777777761,
+      "latent_utility": 0.3141879444444442,
+      "probe_utility": 0.49661233333333304,
+      "abstain_utility": 0.0
+    },
+    {
+      "risk_weight": 1.0,
+      "cost_weight": 0.25,
+      "best_strategy": "latent_disagreement_score",
+      "uncertainty_utility": 0.0823990277777776,
+      "latent_utility": 0.2639211111111109,
+      "probe_utility": 0.2074874999999995,
+      "abstain_utility": 0.0
+    },
+    {
+      "risk_weight": 1.0,
+      "cost_weight": 0.5,
+      "best_strategy": "latent_disagreement_score",
+      "uncertainty_utility": 0.039755277777777584,
+      "latent_utility": 0.18014305555555535,
+      "probe_utility": -0.2743872222222231,
+      "abstain_utility": 0.0
+    },
+    {
+      "risk_weight": 1.0,
+      "cost_weight": 1.25,
+      "best_strategy": "abstain",
+      "uncertainty_utility": -0.08817597222222245,
+      "latent_utility": -0.07119111111111132,
+      "probe_utility": -1.7200113888888913,
+      "abstain_utility": 0.0
+    }
+  ],
+  "interpretation": "Executable probes win when physical probe cost is cheap. Once cost weight reaches 0.25, the latent disagreement score has higher utility; at very high probe cost, abstention wins."
+}

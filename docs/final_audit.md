@@ -1,26 +1,23 @@
 # Final Audit
 
-Status: recovered_success
-
 Paper: 60 embodied_model_disagreement_protocols
 
-Recovered outputs:
+Status: terminal
 
-- `paper/main.pdf`
-- `paper/main.tex`
-- `paper/figures/probe_protocol_summary.png`
-- `docs/related_work_matrix.csv`
-- `docs/serious_skim_300.csv`
-- `docs/deep_read_225.csv`
-- `docs/hostile_100.csv`
-- `docs/probe_protocol_trials.csv`
-- `docs/probe_protocol_results.csv`
-- `docs/protocol_summary.json`
+Decision: workshop-only
 
-Checks:
+## Main reason
 
-- Literature matrix rows: 1200.
-- Crossref unique rows before fallback: 2097.
-- Diagnostic trials: 1080.
-- Build: pdflatex runs from `paper/main.tex`.
-- Boundary: this is a protocol and deterministic witness, not a hardware benchmark.
+The protocol is useful as a mechanism, but the evidence is deterministic and synthetic. V2 hardening shows that executable probes dominate only when physical probe cost is low enough. The paper cannot claim general superiority over latent disagreement or abstention.
+
+## V2 evidence
+
+- Original executable probe diagnostic: 0.795 resolved, 0.106 unsafe false accepts, 1.927 probe cost.
+- Utility at cost weight 0.10: executable probes win, utility 0.497.
+- Utility at cost weight 0.25: latent disagreement wins, utility 0.264 versus 0.207 for probes.
+- Utility at cost weight 0.50: latent disagreement still wins, utility 0.180 versus -0.274 for probes.
+- Utility at cost weight 1.25: abstention wins with utility 0.000.
+
+## Boundary
+
+The paper may claim that disagreement should be compiled into executable probes when cheap safe probes exist. It may not claim hardware validation, cost-insensitive dominance, or universal superiority over scalar or latent disagreement scores.

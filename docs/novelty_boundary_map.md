@@ -1,16 +1,20 @@
 # Novelty Boundary Map
 
-Closest prior classes:
+## In scope
 
-1. Ensemble dynamics and world-model uncertainty.
-2. Bayesian robot learning and active learning.
-3. Information gain for exploration.
-4. Contact-rich manipulation with tactile or force feedback.
-5. Safe model predictive control.
+- Compiling model disagreement into executable physical probes.
+- Reporting predicted observation signatures, safety gates, and stopping rules.
+- Cost-sensitive comparison to scalar uncertainty, latent disagreement, and abstention.
+- Deterministic protocol witness.
 
-Boundary:
+## Out of scope
 
-- Not novel: using an ensemble, computing disagreement, or adding an uncertainty penalty.
-- Novel claim here: define a protocol that maps a disagreement set into the cheapest safe physical probe expected to distinguish candidate embodied models.
-- Evidence level: deterministic diagnostic with 1080 trials; not a real robot benchmark.
-- Core weakness: the diagnostic demonstrates the mechanism, but real hardware validation remains future work.
+- Hardware validation.
+- Universal probe superiority.
+- Solved safety-gate construction.
+- Learned probe libraries.
+- Cost-insensitive probing.
+
+## V2 hostile boundary
+
+The protocol wins only when physical probe cost is low. At cost weight 0.25, latent disagreement utility is 0.264 versus 0.207 for probes. At cost weight 1.25, abstention is best.

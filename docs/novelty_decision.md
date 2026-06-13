@@ -1,15 +1,7 @@
 # Novelty Decision
 
-Chosen thesis: model disagreement in robot world models should not be treated primarily as a scalar uncertainty score. It should be compiled into a small set of executable physical probes whose observations can distinguish the candidate embodied hypotheses.
+Decision: workshop-only.
 
-Why this is strongest:
+The strongest contribution is a protocol boundary: model disagreement should identify the physical probe that would distinguish candidate embodied hypotheses. V2 hardening narrows the claim by showing that physical probing is only rational when the probe is cheap enough. At moderate cost, latent disagreement has higher utility; at high cost, abstention wins.
 
-- It turns disagreement into an action protocol, not another calibration metric.
-- It is embodied: the protocol must account for contact, occlusion, support, force, and safety cost.
-- It is falsifiable: a probe either reduces the hypothesis set or it was the wrong probe.
-
-Rejected alternatives:
-
-- Bigger ensembles: too close to existing uncertainty work.
-- Pure uncertainty calibration: useful but does not say which physical action to take.
-- Passive disagreement heatmaps: descriptive rather than executable.
+The paper is suitable as a workshop protocol note, not as a main-conference empirical result.
