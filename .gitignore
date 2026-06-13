@@ -7,6 +7,8 @@
 *.log
 *.out
 *.synctex.gz
+paper/main.pdf
+data/build_status.json
 data/*raw*.json
 data/*raw*.jsonl
 data/*cache*.json

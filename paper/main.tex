@@ -10,15 +10,21 @@
 \usepackage{amssymb}
 
 \iclrfinalcopy
+\raggedbottom
+\sloppy
 
-\title{Embodied Model Disagreement Protocols: Turning World-Model Uncertainty into Physical Probes}
+\title{Embodied Model Disagreement Protocols}
 
 \author{Robotics 60 Paper Batch, Paper 60\\
-Recovery build\\
+Submission-hardening v2\\
 \texttt{embodied\_model\_disagreement\_protocols}}
 
 \begin{document}
 \maketitle
+
+\noindent\textbf{Submission-hardening note.}
+This v2 manuscript is marked \textbf{workshop-only}.
+The contribution is a protocol-level diagnostic, not a claim that physical probes dominate under high probe cost or on real hardware.
 
 \begin{abstract}
 Robot world models increasingly expose disagreement through ensembles, Bayesian heads, uncertainty penalties, or rollout variance.
@@ -27,7 +33,8 @@ For robots, the operational question is: what small physical probe would disting
 We propose an embodied model disagreement protocol that compiles a disagreement set into executable probe actions, predicted observation signatures, safety gates, and stopping rules.
 A 1200-row literature sweep shows that the local field is rich in uncertainty, planning, and world-model work, with planning-control as the largest discovered tag cluster.
 In a deterministic diagnostic over 1080 trials, executable probes resolve 0.795 of disagreements and reduce unsafe false accepts to 0.106, compared with 0.347 for a scalar uncertainty threshold.
-The contribution is deliberately modest: a protocol-level mechanism and an inspectable witness, not a claim of hardware dominance.
+V2 hardening adds the missing cost sensitivity: probes win when probe cost weight is 0.10 or lower, but latent disagreement wins at cost weight 0.25 and abstention wins at cost weight 1.25.
+The contribution is deliberately modest: a protocol-level mechanism and an inspectable witness, not a claim of hardware dominance or cost-free probing.
 \end{abstract}
 
 \section{Motivation}
@@ -100,17 +107,32 @@ If a disagreement is about friction, contact, support, or identity, passive unce
 The executable protocol spends physical cost to ask a discriminating question.
 Figure~\ref{fig:probe} and Table~\ref{tab:diagnostic} make the tradeoff explicit: the protocol is not free, but it reduces the dangerous case where the planner accepts a model that should have been tested.
 
+\begin{table}[t]
+\centering
+\small
+\input{v2_probe_cost_table.tex}
+\caption{V2 utility stress with utility $U=\mathrm{resolved}-\mathrm{unsafe}-w_c\mathrm{cost}$. Executable probes win only while physical probe cost is cheap. At moderate cost weight, latent disagreement has higher utility; at very high cost, abstention is best.}
+\label{tab:v2-cost}
+\end{table}
+
+Table~\ref{tab:v2-cost} is the hostile cost check.
+It prevents the paper from claiming that physical probes dominate by default.
+When probe cost weight is 0.25, the latent disagreement score has utility 0.264 versus 0.207 for executable probes.
+When cost weight is 1.25, abstention dominates because all active strategies have negative utility.
+The protocol is therefore appropriate only when a cheap, safety-gated physical query exists and the task value justifies paying for it.
+
 \section{Limitations}
 This paper should be read as a protocol proposal.
 The diagnostic is synthetic, the probe library is hand-specified, and no hardware claim is made.
 The largest unresolved problem is the safety gate: in difficult manipulation settings, deciding whether a probe is safe may be as hard as the original planning problem.
+The v2 utility stress adds a second unresolved problem: if the physical probe is expensive or disruptive, a weaker latent-disagreement policy or abstention can be rational.
 The protocol is still useful because it forces papers to expose that requirement rather than hiding it behind a scalar uncertainty score.
 
 \section{Conclusion}
 Embodied model disagreement is valuable only when it changes what the robot does.
 The proposed protocol turns disagreement into safe physical probes with predicted observation signatures and stopping rules.
 For the batch artifact, the paper supplies a literature matrix, review subsets, diagnostic data, source, figure, and compiled PDF.
-For future work, the obvious next step is a hardware study where the same disagreement set is tested with visual, tactile, and contact probes.
+For future work, the obvious next step is a hardware study where the same disagreement set is tested with visual, tactile, and contact probes under an explicit cost budget.
 
 \begin{thebibliography}{9}
 \bibitem[Ha and Schmidhuber(2018)]{ha2018world}
