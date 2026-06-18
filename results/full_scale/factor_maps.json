@@ -1,0 +1,62 @@
+{
+  "ambiguity": {
+    "a00": "free space dynamics",
+    "a01": "occluded contact",
+    "a02": "friction cone",
+    "a03": "support graph",
+    "a04": "tool hinge",
+    "a05": "object identity",
+    "a06": "deformable compliance",
+    "a07": "multi object occlusion"
+  },
+  "model_family": {
+    "m00": "ensemble dynamics",
+    "m01": "Bayesian dynamics head",
+    "m02": "diffusion video predictor",
+    "m03": "contact graph predictor",
+    "m04": "latent object state model",
+    "m05": "hybrid dynamics model"
+  },
+  "strategy": {
+    "s00": "uncertainty_threshold",
+    "s01": "latent_disagreement_score",
+    "s02": "passive_extra_observation",
+    "s03": "random_executable_probe",
+    "s04": "executable_probe_protocol",
+    "s05": "cost_sensitive_probe_policy",
+    "s06": "safety_gated_probe_policy",
+    "s07": "abstain",
+    "s08": "oracle_signature_selector"
+  },
+  "cost_weight": {
+    "c00": "0.00",
+    "c01": "0.05",
+    "c02": "0.10",
+    "c03": "0.25",
+    "c04": "0.50",
+    "c05": "1.25"
+  },
+  "risk_weight": {
+    "r00": "0.50",
+    "r01": "1.00",
+    "r02": "1.50",
+    "r03": "2.00",
+    "r04": "3.00"
+  },
+  "observation": {
+    "o00": "vision only",
+    "o01": "proprioception and force",
+    "o02": "tactile plus vision",
+    "o03": "full multimodal state"
+  },
+  "severity": {
+    "v00": "mild",
+    "v01": "moderate",
+    "v02": "severe",
+    "v03": "adversarial"
+  },
+  "probe_library": {
+    "l00": "sparse hand coded probes",
+    "l01": "calibrated task probes"
+  }
+}

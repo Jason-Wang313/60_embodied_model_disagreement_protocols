@@ -4,8 +4,11 @@
 
 1. Scalar uncertainty scores do not specify the physical observation that would disambiguate embodied models.
 2. A useful protocol should emit a probe action, predicted observation signatures, a safety gate, and a stopping rule.
-3. In the deterministic diagnostic, executable probes resolve 0.795 of disagreements and reduce unsafe false accepts to 0.106.
-4. The v2 utility stress shows executable probes win only at low physical-cost weights.
+3. The full-scale benchmark contains 414,720 compact condition rows representing 108,716,359,680 evaluations.
+4. The safety-gated probe policy is the best non-oracle strategy, with utility 0.373966 and unsafe false accept 0.103445.
+5. The oracle selector reaches utility 0.846562, leaving substantial headroom for better signature prediction and safety-aware probe selection.
+6. The v2 utility stress and full-scale cost sweep show that physical probes are rational only when their cost and risk are justified.
+7. At the highest physical-cost weight, abstention is the best deployable strategy.
 
 ## Removed or narrowed
 

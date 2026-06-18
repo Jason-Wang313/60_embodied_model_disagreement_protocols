@@ -1,5 +1,5 @@
 # Hostile Reviewer Response
 
-The strongest reviewer objection is that a physical probe can cost more than the information is worth. The v2 manuscript accepts and measures this.
+The strongest reviewer objection is that a physical probe can cost more than the information is worth. The final manuscript accepts this and makes it central rather than defensive.
 
-Executable probes win when probe cost weight is 0.10 or lower. At 0.25, latent disagreement has higher utility. At 1.25, abstention is best. The revised paper therefore claims a protocol for cheap safety-gated probes, not universal dominance.
+The v2 negative control shows executable probes win only when probe cost is low. The full-scale benchmark keeps that boundary: safety-gated probing is the best non-oracle strategy on average, but at the highest physical-cost weight, abstention is the best deployable strategy. The revised paper therefore claims a cost-aware, safety-gated protocol and benchmark, not universal probe dominance or hardware safety.

@@ -8,9 +8,10 @@
 - "The safety gate may be harder than the original planning problem."
 - "The probe library is hand-specified."
 
-## V2 response
+## V3 response
 
-- The manuscript now frames the contribution as the embodied compilation step from disagreement to safe probe.
-- Added a utility stress over physical probe cost.
-- Reported that probes lose to latent disagreement at cost weight 0.25 and to abstention at cost weight 1.25.
-- Final decision is workshop-only.
+- The manuscript now frames the contribution as the embodied compilation step from disagreement to safe probe, with predicted signatures, safety gates, aborts, cost accounting, and stopping rules.
+- Retained the v2 utility stress over physical probe cost as a negative control.
+- Added a full-scale deterministic benchmark over 414,720 compact condition rows.
+- Reported that safety-gated probing is the best non-oracle strategy on average, while abstention is the best deployable strategy at the highest physical-cost weight.
+- Final decision is a full-scale deterministic submission candidate, not a hardware safety claim.
