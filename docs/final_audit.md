@@ -4,20 +4,24 @@ Paper: 60 embodied_model_disagreement_protocols
 
 Status: terminal
 
-Decision: workshop-only
+Decision: final full-scale deterministic submission candidate
 
 ## Main reason
 
-The protocol is useful as a mechanism, but the evidence is deterministic and synthetic. V2 hardening shows that executable probes dominate only when physical probe cost is low enough. The paper cannot claim general superiority over latent disagreement or abstention.
+The final paper is a 30-page full-scale deterministic benchmark. It expands the v2 protocol note into a RAM-light suite over 414,720 compact condition rows, representing 108,716,359,680 evaluations and 6,957,847,019,520 planning-tick decisions. The strongest deployable result is the safety-gated probe policy, while abstention remains the best deployable strategy at the highest physical cost weight.
 
-## V2 evidence
+## V3 evidence
 
-- Original executable probe diagnostic: 0.795 resolved, 0.106 unsafe false accepts, 1.927 probe cost.
-- Utility at cost weight 0.10: executable probes win, utility 0.497.
-- Utility at cost weight 0.25: latent disagreement wins, utility 0.264 versus 0.207 for probes.
-- Utility at cost weight 0.50: latent disagreement still wins, utility 0.180 versus -0.274 for probes.
-- Utility at cost weight 1.25: abstention wins with utility 0.000.
+- Best non-oracle strategy: safety_gated_probe_policy, utility 0.373966.
+- Oracle selector utility: 0.846562.
+- Uncertainty-threshold unsafe false accept: 0.382443.
+- Executable-probe unsafe false accept: 0.137995.
+- Safety-gated unsafe false accept: 0.103445.
+- Highest-cost best deployable strategy: abstain.
+- Canonical PDF: `C:/Users/wangz/Downloads/60.pdf`.
+- Canonical PDF pages: 30.
+- Canonical PDF SHA256: 407C2F0EC72FCFFDB6EF81F509B85D7E6014F0D0082314613AA0CB4D657AC552.
 
 ## Boundary
 
-The paper may claim that disagreement should be compiled into executable probes when cheap safe probes exist. It may not claim hardware validation, cost-insensitive dominance, or universal superiority over scalar or latent disagreement scores.
+The paper may claim that cost-aware, safety-gated physical probes improve the safety-resolution tradeoff when cheap safe observable signatures exist. It may not claim hardware validation, cost-insensitive dominance, safety certification, or universal superiority over latent disagreement and abstention.

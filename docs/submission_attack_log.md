@@ -2,16 +2,16 @@
 
 ## Attack 1: This is just active learning.
 
-Outcome: Partially survives only after narrowing. The paper now emphasizes physical probe compilation with safety gates and predicted observation signatures.
+Outcome: Survives as a bounded benchmark claim. The final manuscript requires executable probes, predicted observation signatures, safety gates, abort semantics, cost accounting, and abstention behavior rather than scalar information gain alone.
 
 ## Attack 2: Physical probes are too expensive.
 
-Outcome: Confirmed as a boundary. At cost weight 0.25, latent disagreement beats probes; at 1.25, abstention wins.
+Outcome: Addressed as a central boundary, not hidden. The v2 negative control is retained, and the full-scale benchmark confirms that at the highest physical cost weight, abstention is the best deployable strategy.
 
 ## Attack 3: Safety gate may be as hard as planning.
 
-Outcome: Confirmed as unresolved. The paper remains workshop-only.
+Outcome: Acknowledged and instrumented. The final paper reports unsafe false accepts, gate precision, recall, abort rate, false abstention, recovery margin, and reversibility. It does not claim the safety gate is solved.
 
 ## Attack 4: No hardware evidence.
 
-Outcome: Confirmed. Decision is workshop-only.
+Outcome: Acknowledged as a limitation. The final version is a deterministic full-scale submission candidate and benchmark/reporting discipline, not a hardware safety or sim-to-real claim.
