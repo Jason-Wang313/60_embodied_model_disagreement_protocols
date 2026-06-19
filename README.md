@@ -19,6 +19,8 @@ The paper is now a 30-page deterministic benchmark submission candidate, not the
 - Safety-gated unsafe false accept: 0.103445
 - Highest-cost best deployable strategy: `abstain`
 - Final PDF: `C:/Users/wangz/Downloads/60.pdf`
+- Final PDF SHA256: `15868C37F4A2E75FB067DAFC6A5404FAE1AD78E9D5956E1F9DA1A462353341B5`
+- Visual hardening: VLA-v4-style boxed links, with green citation/URL borders and red internal-reference borders, verified on pages 2, 5, 8, 9, 10, 12, 13, 14, 15, and 26.
 
 ## Reproducible artifacts
 
